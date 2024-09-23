@@ -1,0 +1,29 @@
+# LG 4k monitor (139.87 PPI)
+output 'LG Electronics LG HDR 4K 304MAUAE2326' {
+    alias $lg4k
+    enable
+    position 0,0
+    scale 1.2
+}
+
+# Internal Framework screen (200.84 PPI)
+output 'BOE 0x095F Unknown' {
+    alias $fw
+    enable
+    position 0,0
+    scale 1.3
+}
+
+profile fw-internal {
+	output $fw
+}
+
+profile fw-external-4k {
+    output $lg4k 
+    output $fw disable
+    #output $lg4k enable position -660,-1801 scale 1.271
+    #output $fw enable position 0,0 scale 1.826
+    #output $lg4k enable position -1050,-2160 scale 1.2
+}
+
+# vim: et sw=4

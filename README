@@ -1,0 +1,13 @@
+Just quick and dirty dotfiles.
+
+## Setup
+
+```
+./bootstrap.sh
+stow base
+stow gui
+```
+
+## What's missing
+
+- ssh config
