@@ -43,6 +43,7 @@ vim.g.maplocalleader = "\\"
 
 -- Setup lazy.nvim
 require("lazy").setup({
+  checker = { enabled = true, frequency = 604800, notify = false },
   spec = {
     { "neovim/nvim-lspconfig" },
     { "nvim-treesitter/nvim-treesitter",
