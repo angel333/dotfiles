@@ -1,0 +1,74 @@
+// -*- mode: jsonc -*-
+
+{
+  "position": "bottom",
+  "start_hidden": false,
+  "modules-center": [
+    "river/mode"
+  ],
+  "modules-right": [
+    "tray",
+    "pulseaudio",
+    "backlight",
+    "temperature",
+    "network",
+    "battery",
+    "clock#date",
+    "clock"
+  ],
+  "spacing": 20,
+  "battery": {
+    //"justify": "center",
+    "format": "{icon}    {capacity}% - {time}",
+    "format-critical": "[ !!! {capacity}% - {time} ]",
+    "format-full": "<[ full ]", // does this work?
+    "tooltip-format": "{timeTo}\n{power}W",
+    "format-time": "{H}:{m}",
+    "format-icons": ["", "", "", "", ""],
+    "states": {
+      "critical": 20
+    }
+  },
+  "clock#date": {
+    "format": "{:%d/%m %a}",
+    "tooltip": false
+  },
+  "clock": {
+    "format": "{:%H:%M}",
+    "tooltip": false
+  },
+  "river/mode": {
+    "format": "- {} -"
+  },
+  "backlight": {
+      // "device": "acpi_video1",
+      "format": "{icon}  {percent}%",
+      "format-icons": ["", "", "", "", "", "", "", "", ""]
+  },
+  "network": {
+      "format-wifi": "    {essid} ({signalStrength}%)",
+      "format-ethernet": "   {ipaddr}/{cidr}",
+      "tooltip-format": "   {ifname} via {gwaddr} ",
+      "format-linked": "   {ifname} (No IP) ",
+      "format-disconnected": "⚠   Disconnected ",
+      "format-alt": "{ifname}: {ipaddr}/{cidr}"
+  },
+  "pulseaudio": {
+      "format": "{icon} {volume}% {format_source}",
+      "format-bluetooth": " {icon} {volume}% {format_source}",
+      "format-bluetooth-muted": " {icon}  {format_source}",
+      "format-muted": "  {format_source}",
+      "format-source": "  {volume}%",
+      "format-source-muted": "",
+      "format-icons": {
+          "headphone": "",
+          "hands-free": "",
+          "headset": "",
+          "phone": "",
+          "portable": "",
+          "car": "",
+          "default": ["", "", ""]
+      },
+      "on-click": "pavucontrol"
+  }
+}
