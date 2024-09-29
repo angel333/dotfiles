@@ -16,11 +16,13 @@ output 'BOE 0x095F Unknown' {
 
 profile fw-internal {
 	output $fw
+    exec riverctl send-layout-cmd wideriver "--ratio .35"
 }
 
 profile fw-external-4k {
     output $lg4k 
     output $fw disable
+    exec riverctl send-layout-cmd wideriver "--ratio .5"
     #output $lg4k enable position -660,-1801 scale 1.271
     #output $fw enable position 0,0 scale 1.826
     #output $lg4k enable position -1050,-2160 scale 1.2

@@ -6,20 +6,26 @@
 WIN95_BG_COLOR=0x008080 # or 0x007e7d?
 RED=0xff0000
 LIME=0x00ff00
-GREY=0x202020
+#GREY=0x202020
 BLACK=0x000000
 
+# TODO(3): these colors are owerwritten by wideriver!
 riverctl background-color       $BLACK
 riverctl border-color-focused   $RED
-riverctl border-color-unfocused $GRAY
-border-color-urgent             $RED
-border-width pixels             1
+riverctl border-color-unfocused $BLACK
+riverctl border-color-urgent    $LIME
+riverctl border-width           2
 
-# keyboard settings
-riverctl set-repeat 50 300
+#riverctl focus-follows-cursor   disabled # disabled*|normal|always
+#riverctl hide-cursor            timeout 0
+riverctl hide-cursor            when-typing enabled
+riverctl set-cursor-warp        on-output-change # disabled*|on-[output|focus]-change
 
 
 ## Input Devices ######################################################
+
+# keyboard settings
+riverctl set-repeat 50 200
 
 # type-numerical_vendor_id-numerical_product_id-self_advertised_name
 # see: riverctl list-inputs
@@ -56,7 +62,7 @@ riverctl input "$FW_TOUCHPAD" scroll-method          two-finger
 
 ## Rules ##############################################################
 
-# Easiest way to find `-title` and `-app-id`: [lswt](https://git.sr.ht/~leon_plickat/lswt)
+# easiest way to find `-title` and `-app-id`: [lswt](https://git.sr.ht/~leon_plickat/lswt)
 
 riverctl rule-add -app-id firefox ssd # make the focused border visible
 
@@ -65,6 +71,7 @@ riverctl rule-add -app-id firefox ssd # make the focused border visible
 
 # bindings - general
 riverctl map normal Super+Shift Q exit
+riverctl map normal Super+Shift R spawn "sh -c ~/.config/river/init"
 riverctl map normal Super+Shift I spawn 'pkill -x -USR1 waybar'
 
 # bindings - apps
@@ -152,6 +159,7 @@ do
 done
 
 # layout generator
+# TODO(3): not sure why it needs to set border cfg again
 pkill wideriver; wideriver \
     --layout wide \
     --ratio-wide .5 \
@@ -163,18 +171,26 @@ pkill wideriver; wideriver \
     --border-color-unfocused $BLACK \
     &
 
+
 riverctl default-layout wideriver
 
 #riverctl default-layout rivertile
 #rivertile -view-padding 0 -outer-padding 0 &
 
-# startup
-pkill kanshi ; kanshi &
-pkill waybar ; waybar &
-pkill mako ; mako &
 
 
+## Other ##############################################################
 
+(pidof kanshi >/dev/null) \
+  && kanshictl reload \
+  || kanshi&
+
+(pidof mako >/dev/null) \
+  && makoctl reload \
+  || mako&
+
+pkill waybar
+waybar &
 
 
 
@@ -484,29 +500,6 @@ pkill mako ; mako &
 #
 #
 # 
-#        focus-follows-cursor disabled|normal|always
-#            There are three available modes:
-# 
-#            •   disabled: Moving the cursor does not affect focus. This is the default.
-#            •   normal: Moving the cursor over a view will focus that view. Moving the cursor within a view will not re-focus that view if focus has moved  else‐
-#                where.
-#            •   always: Moving the cursor will always focus whatever view is under the cursor.
-# 
-#            If the view to be focused is on an output that does not have focus, focus is switched to that output.
-# 
-#        hide-cursor timeout timeout
-#            Hide  the  cursor  if  it wasn't moved in the last timeout milliseconds until it is moved again. The default value is 0, which disables automatically
-#            hiding the cursor. Show the cursor again on any movement.
-# 
-#        hide-cursor when-typing enabled|disabled
-#            Hide the cursor when pressing any non-modifier key. Show the cursor again on any movement.
-# 
-#        set-cursor-warp disabled|on-output-change|on-focus-change
-#            Set the cursor warp mode. There are two available modes:
-# 
-#            •   disabled: Cursor will not be warped. This is the default.
-#            •   on-output-change: When a different output is focused, the cursor will be warped to its center.
-#            •   on-focus-change: When a different view/output is focused, the cursor will be warped to its center.
 # 
 #        set-repeat rate delay
 #            Set the keyboard repeat rate to rate key repeats per second and repeat delay to delay milliseconds.
