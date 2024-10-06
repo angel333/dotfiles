@@ -10,6 +10,8 @@ require 'lspconfig'.lua_ls.setup {   -- requires lua-language-server
   },
 }
 
+vim.lsp.inlay_hint.enable(false)
+
 vim.api.nvim_create_autocmd('LspAttach', {
   callback = function(args)
     local client = vim.lsp.get_client_by_id(args.data.client_id)
@@ -17,18 +19,8 @@ vim.api.nvim_create_autocmd('LspAttach', {
       return
     end
 
-    if client.supports_method('textDocument/inlayHint') then
-      vim.lsp.inlay_hint.enable(true, { bufnr = args.buf })
-      -- toggle
-      vim.keymap.set('n', '<Leader>i', function()
-        local desired = not vim.lsp.inlay_hint.is_enabled()
-        vim.lsp.inlay_hint.enable(desired)
-      end)
-    end
-
     if client.supports_method('textDocument/completion') then
       vim.lsp.completion.enable(true, client.id, args.buf, { autotrigger = true })
-      vim.keymap.set('i', '<C-Space>', function() vim.lsp.completion.trigger() end)
     end
 
     if client.supports_method('textDocument/formatting') then
