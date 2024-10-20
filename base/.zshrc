@@ -8,6 +8,8 @@ alias vimdiff='nvim -d'
 alias puw='sudo pacman -Syuw --noconfirm'
 alias pu='sudo pacman -Su'
 
+alias o='nvim ~/Documents/Obsidian_Vault'
+
 # Function to get the current git branch
 get_git_branch() {
   git branch 2> /dev/null | grep '*' | sed 's/* //'
