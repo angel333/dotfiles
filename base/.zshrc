@@ -34,3 +34,7 @@ bindkey -e
 
 # enable autocomplete for hidden files without first writing a dot
 setopt globdots
+
+# enable completion
+autoload -U compinit
+compinit
