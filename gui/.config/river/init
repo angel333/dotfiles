@@ -81,6 +81,7 @@ riverctl map normal Super+Shift Y spawn 'wl-paste | xargs yt-dlp -o - | mpv -'
 
 # bindings - special
 riverctl map normal Super+Shift B spawn 'bluetoothctl connect 57:84:82:33:C4:2B'
+riverctl map normal Super+Shift+Alt B spawn 'bluetoothctl disconnect 57:84:82:33:C4:2B'
 
 # bindings - top row
 for mode in normal locked
