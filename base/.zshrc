@@ -50,3 +50,5 @@ cat ~/Documents/motds \
 | grep -v '^#' \
 | shuf -n1 \
 | xargs -d"\n" printf "%s\n"
+
+PATH=$PATH:~/.local/bin
