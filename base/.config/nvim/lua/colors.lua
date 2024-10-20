@@ -10,6 +10,7 @@ vim.api.nvim_create_autocmd('ColorScheme', {
     hl(0, 'Comment', { fg = '#87afff', italic = true })
     hl(0, 'LspInlayHint', { fg = '#585858', italic = true })
     hl(0, 'VertSplit', { fg = '#303030', bg = '#000000' })
+    hl(0, 'Identifier', { fg = '#40ffff', bold = true })
   end,
 })
 
