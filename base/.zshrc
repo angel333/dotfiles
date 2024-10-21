@@ -52,3 +52,5 @@ cat ~/Documents/motds \
 | xargs -d"\n" printf "%s\n"
 
 PATH=$PATH:~/.local/bin
+
+[ -f "/home/angel333/.ghcup/env" ] && . "/home/angel333/.ghcup/env" # ghcup-env
