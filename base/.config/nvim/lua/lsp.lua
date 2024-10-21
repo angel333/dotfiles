@@ -2,13 +2,7 @@ require 'lspconfig'.nushell.setup {} -- included in nu
 require 'lspconfig'.zls.setup {}     -- included in zig
 require 'lspconfig'.gleam.setup {}   -- included in gleam
 require 'lspconfig'.lua_ls.setup {   -- requires lua-language-server
-  settings = {
-    Lua = {
-      diagnostics = {
-        globals = { 'vim' }
-      },
-    },
-  },
+  -- see ../.luarc.json
 }
 
 vim.lsp.inlay_hint.enable(false)
