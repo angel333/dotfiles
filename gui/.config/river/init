@@ -77,7 +77,8 @@ riverctl map normal Super+Shift I spawn 'pkill -x -USR1 waybar'
 # bindings - apps
 riverctl map normal Super+Shift Return spawn foot
 riverctl map normal Super+Shift F spawn firefox
-riverctl map normal Super+Shift Y spawn 'wl-paste | xargs yt-dlp -o - | mpv -'
+riverctl map normal Super+Shift Y spawn 'wl-paste | xargs yt-dlp --prefer-free-formats -o - | mpv -'
+riverctl map normal Super+Shift S spawn 'curl http://172.16.0.149/relay/0\?turn=toggle' # shelly at home
 
 # bindings - special
 riverctl map normal Super+Shift B spawn 'bluetoothctl connect 57:84:82:33:C4:2B'
