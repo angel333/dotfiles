@@ -21,7 +21,7 @@ vim.opt.conceallevel = 2
 vim.opt.foldtext = '' -- much less confusing folds
 vim.opt.foldmethod = 'marker'
 
-vim.opt.completeopt = 'menu,popup,longest'
+vim.opt.completeopt = 'menu,popup,noselect' -- there were issues with 'longest'
 
 -- <C-[hjkl]> window navigation
 vim.keymap.set('n', '<C-h>', function() vim.cmd.wincmd('h') end)
