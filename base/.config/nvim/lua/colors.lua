@@ -1,7 +1,10 @@
--- highlight groups overrides
+local THEME_LIGHT = 'morning'
+local THEME_DARK = 'torte'
+
+-- 'torte' theme highlight group overrides
 vim.api.nvim_create_autocmd('ColorScheme', {
   pattern = 'torte',
-  desc = 'highlight groups overrides',
+  desc = "highlight group overrides the 'torte' theme",
   callback = function()
     local hl = vim.api.nvim_set_hl
     hl(0, 'Folded', { fg = '#808080', bg = '#303030' })
@@ -14,6 +17,18 @@ vim.api.nvim_create_autocmd('ColorScheme', {
   end,
 })
 
-vim.cmd.colorscheme('torte')
+vim.api.nvim_create_autocmd('OptionSet', {
+  desc = "set light/dark theme when switching 'background'",
+  pattern = "background",
+  callback = function()
+    local bg = vim.opt.background:get()
+    vim.cmd.colorscheme(
+      'dark' == bg
+      and THEME_DARK
+      or THEME_LIGHT
+    )
+    print(bg .. ' mode activated')
+  end
+});
 
 -- vim:et:sw=2:ts=2:

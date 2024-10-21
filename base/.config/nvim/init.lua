@@ -32,6 +32,14 @@ vim.keymap.set('n', '<C-l>', function() vim.cmd.wincmd('l') end)
 -- save with <Space>
 vim.keymap.set('n', '<Space>', vim.cmd.update)
 
+-- toggle dark mode
+vim.keymap.set('n', '<Leader>`', function()
+  vim.opt.background =
+      ('dark' == vim.opt.background:get())
+      and 'light'
+      or 'dark'
+end)
+
 vim.keymap.set('i', '<C-Space>', function()
   vim.lsp.completion.trigger()
 end)
