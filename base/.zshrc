@@ -46,8 +46,8 @@ compinit
 
 #tput setaf 234
 tput setaf 245
-cat ~/Documents/motds \
-| grep -v '^#' \
+cat ~/Documents/Obsidian_Vault/MOTD.md \
+| grep -oP '^- \K.*' \
 | shuf -n1 \
 | xargs -d"\n" printf "%s\n"
 
