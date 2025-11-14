@@ -1,0 +1,49 @@
+#!/bin/sh
+
+STATE_DIR=~/.local/state/dotfiles
+AVAILABLE_VARS=('touchpad-id' 'bt-headset-dev')
+
+setvar() {
+  mkdir -p "${STATE_DIR}"
+  echo "$2 -> ${STATE_DIR}/${1}" >&1
+  echo "$2" > "${STATE_DIR}/${1}"
+}
+
+getvar() {
+  if [[ ! -f "${STATE_DIR}/${1}" ]]; then
+    echo '(empty)'
+  else
+    cat "${STATE_DIR}/${1}" 2>/dev/null
+  fi
+}
+
+comps() {
+  case "$1" in
+    'bt-headset-dev')
+      LC_ALL=C bluetoothctl devices | sed 's/^Device //'
+      ;;
+    'touchpad-id')
+      LC_ALL=C riverctl list-inputs | grep -v '^$' | grep -v '^\s'
+      ;;
+  esac
+}
+
+case "$1" in
+  '')
+    for var in ${AVAILABLE_VARS[@]}; do
+      echo -n "${var}: "
+      getvar "${var}"
+      comps "${var}" | sed 's/^/    /'
+    done
+    ;;
+  'help')
+    echo "usage: $0 [help | <var> [<value>]]"
+    ;;
+  *)
+    if [[ '' != "$2" ]]; then
+      setvar "$1" "$2"
+    else
+      getvar "$1"
+    fi
+    ;;
+esac

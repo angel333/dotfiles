@@ -13,4 +13,6 @@ case "$NAME" in
     ;;
 esac
 
+mkdir -p ~/.local/state/dotfiles
+
 # vim: et sw=2 ts=2

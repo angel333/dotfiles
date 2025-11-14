@@ -4,8 +4,13 @@ Just quick and dirty dotfiles.
 
 ```
 ./bootstrap.sh
+
 stow base
 stow gui
+
+# for possible values run ./state with no arguments
+./state bt-headset-dev <addr>
+./state touchpad-id <id>
 ```
 
 ## What's missing
