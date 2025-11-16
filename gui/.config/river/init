@@ -87,8 +87,8 @@ riverctl map normal Super+Shift Y spawn 'wl-paste | xargs yt-dlp --prefer-free-f
 riverctl map normal Super+Shift S spawn 'curl http://172.16.0.149/relay/0\?turn=toggle' # shelly at home
 
 # bindings - special
-riverctl map normal Super+Shift B spawn 'cat ${STATE_DIR}/bt-headset-dev | xargs bluetoothctl connect'
-riverctl map normal Super+Shift+Alt B spawn 'cat ${STATE_DIR}/bt-headset-dev | xargs bluetoothctl disconnect'
+riverctl map normal Super+Shift     B spawn "systemctl --user show-environment | grep '^BT_HEADSET_DEV=' | cut -d= -f2 | xargs bluetoothctl connect"
+riverctl map normal Super+Shift+Alt B spawn "systemctl --user show-environment | grep '^BT_HEADSET_DEV=' | cut -d= -f2 | xargs bluetoothctl disconnect"
 
 # bindings - top row
 for mode in normal locked

@@ -1,20 +1,32 @@
 #!/bin/sh
 
-STATE_DIR=~/.local/state/dotfiles
-AVAILABLE_VARS=('touchpad-id' 'bt-headset-dev')
+AVAILABLE_VARS=('river-touchpad-id' 'bt-headset-dev')
+ENV_DIR=~/.config/environment.d
+
+var_name() {
+  echo $1 | tr '[:lower:]-' '[:upper:]_'
+}
+
+env_file_path() {
+  echo $1 \
+    | tr '[:upper:]_' '[:lower:]-' \
+    | xargs printf '%s/50-%s.conf' "$ENV_DIR"
+}
 
 setvar() {
-  mkdir -p "${STATE_DIR}"
-  echo "$2 -> ${STATE_DIR}/${1}" >&1
-  echo "$2" > "${STATE_DIR}/${1}"
+  env_str="$(var_name "$1")=$2"
+  systemctl --user set-environment "$env_str"
+
+  # persist
+  mkdir -p "$ENV_DIR"
+  echo "$env_str -> $(env_file_path "$1")"
+  echo "$env_str" > "$(env_file_path "$1")"
+  systemctl --user daemon-reload
 }
 
 getvar() {
-  if [[ ! -f "${STATE_DIR}/${1}" ]]; then
-    echo '(empty)'
-  else
-    cat "${STATE_DIR}/${1}" 2>/dev/null
-  fi
+  systemctl --user show-environment \
+    | grep -Po "(?<=^$(var_name "$1")=).*"
 }
 
 comps() {
@@ -22,7 +34,7 @@ comps() {
     'bt-headset-dev')
       LC_ALL=C bluetoothctl devices | sed 's/^Device //'
       ;;
-    'touchpad-id')
+    'river-touchpad-id')
       LC_ALL=C riverctl list-inputs | grep -v '^$' | grep -v '^\s'
       ;;
   esac
@@ -31,8 +43,7 @@ comps() {
 case "$1" in
   '')
     for var in ${AVAILABLE_VARS[@]}; do
-      echo -n "${var}: "
-      getvar "${var}"
+      printf "%s: %s\n" "$var" "$(getvar "${var}" || echo "(not set)")"
       comps "${var}" | sed 's/^/    /'
     done
     ;;
