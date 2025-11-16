@@ -1,12 +1,10 @@
-require 'lspconfig'.nushell.setup {}  -- included in nu
-require 'lspconfig'.zls.setup {}      -- included in zig
-require 'lspconfig'.gleam.setup {}    -- included in gleam
-require 'lspconfig'.ocamllsp.setup {} -- `opam install ocaml-lsp-server`
-require 'lspconfig'.hls.setup {}      -- ?
-require 'lspconfig'.pyright.setup {}  -- requires pyright
-require 'lspconfig'.lua_ls.setup {    -- requires lua-language-server
-  -- see ../.luarc.json
-}
+vim.lsp.enable('nushell')  -- included in nu
+vim.lsp.enable('zls')      -- included in zig
+vim.lsp.enable('gleam')    -- included in gleam
+vim.lsp.enable('ocamllsp') -- `opam install ocaml-lsp-server`
+vim.lsp.enable('hls')      -- ?
+vim.lsp.enable('pyright')  -- requires pyright
+vim.lsp.enable('lua_ls')   -- requires lua-language-server; config in ../.luarc.json
 
 vim.lsp.inlay_hint.enable(false)
 
