@@ -2,6 +2,8 @@ require 'lspconfig'.nushell.setup {}  -- included in nu
 require 'lspconfig'.zls.setup {}      -- included in zig
 require 'lspconfig'.gleam.setup {}    -- included in gleam
 require 'lspconfig'.ocamllsp.setup {} -- `opam install ocaml-lsp-server`
+require 'lspconfig'.hls.setup {}      -- ?
+require 'lspconfig'.pyright.setup {}  -- requires pyright
 require 'lspconfig'.lua_ls.setup {    -- requires lua-language-server
   -- see ../.luarc.json
 }
